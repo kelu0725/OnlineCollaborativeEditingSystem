@@ -1,5 +1,5 @@
 Read me
-
+# Deployment
 ## Git
 sudo apt-get install git
 sudo - 代表使用管理者权限运行，在对系统操作时往往需要（类似window中对C盘操作），可能会提示输入用户密码
