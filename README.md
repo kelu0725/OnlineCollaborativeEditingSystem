@@ -3,6 +3,9 @@
 
 ## Model
 ## View
+npm install bootstrap --save (save is used to add dependency to package.json)</br>
+npm install jquery --save</br>
+
 ## Service
 ## Component
 
