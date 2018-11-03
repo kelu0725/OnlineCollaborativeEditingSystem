@@ -1,76 +1,34 @@
 .difficulty {
-    min-width: 65px;
-    margin-right: 10px;
-  }
+  min-width: 65px;
+  margin-right: 10px;
+}
 
-  .label.difficulty {
-    padding: 0.6em;
-    color: #fbfdfa;
-    font-size: 12px;
-  }
+.label.difficulty {
+  padding: 0.6em;
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
 
-  .description{
-    font-size: 1.0em;
-  }
+}
 
-  .description{
-     margin-top:0.6em;
-     margin-left:2em;
-     padding: 1.2em 1.5em;
-  }
+.title {
+  font-size: 1.2em;
+    color: black;
+}
 
-  .title {
-    font-size: 1.4em;
-  }
+.diff-easy {
+  background-color: #42ebf4;
+}
 
-  .diff-easy {
-    background-color: #5DF51B;
-    border: none;
-   padding: 15px 32px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   margin: 4px 2px;
-   cursor: pointer;
-   border-radius: 12px;
-  }
+.diff-medium {
+  background-color: #92cf5c;
+}
 
-  .diff-medium {
-    background-color: #1BBDF5;
-    border: none;
-   padding: 15px 32px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   margin: 4px 2px;
-   cursor: pointer;
-   border-radius: 12px;
-  }
+.diff-hard {
+  background-color: #dd0d1e;
+}
 
-  .diff-hard {
-    background-color: #e44242;
-    border: none;
-   padding: 15px 32px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   margin: 4px 2px;
-   cursor: pointer;
-   border-radius: 12px;
-  }
-
-  .diff-super {
-    background-color: #5b2780;
-    border: none;
-   padding: 15px 32px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   margin: 4px 2px;
-   cursor: pointer;
-   border-radius: 12px;
-  }
+.diff-super {
+  background-color: #8d16e2;
+}

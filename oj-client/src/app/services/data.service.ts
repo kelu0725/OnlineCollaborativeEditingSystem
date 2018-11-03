@@ -6,16 +6,21 @@ import {PROBLEMS} from'../fake-problem';
   providedIn: 'root'
 })
 export class DataService {
+  problems:Problem[]=PROBLEMS;
 
   constructor() { }
 
   getProblems(): Problem[]{
-    return PROBLEMS;
+    return this.problems;
   }
 
   getProblem(id:number):Problem{
-    return PROBLEMS.find((problem) => problem.id === id);
+    return this.problems.find((problem) => problem.id === id);
     //lambda function. function(problem){problem.id===id}
   }
-  //add problem
+  
+  addProblem(problem:Problem){
+    problem.id = this.problems.length + 1;
+    this.problems.push(problem);
+  }
 }

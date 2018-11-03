@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Problem} from '../../models/problem.model';
-import {PROBLEMS} from '../../fake-problem';
 import {DataService} from '../../services/data.service'
 
 @Component({ //declare this is a component

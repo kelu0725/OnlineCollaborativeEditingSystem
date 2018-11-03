@@ -1,10 +1,14 @@
 <div class = "container">
+  <app-new-problem></app-new-problem>
   <div class = "list-group">
-    <div class = "list-group-item" *ngFor="let problem of problems">
-      <span  class = "{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">
-        {{problem.difficulty}}
-      </span>
-    <span class = "title"> {{problem.id}}.{{problem.name}}   </span>
-  </div>
+    <a class="list-group-item" *ngFor="let problem of problems"
+      [routerLink] = "['/problems', problem.id]">
+
+      <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">{{problem.difficulty}}</span>
+
+      <span class="title" >{{problem.id}}. {{problem.name}}</span>
+    </a>
   </div>
 </div>
+
+<!--  [RouterLink]="['/problems',problem.id]" -->
