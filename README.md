@@ -1,16 +1,4 @@
 
-# Angular
-
-## Model
-## View
-npm install bootstrap --save (save is used to add dependency to package.json)</br>
-npm install jquery --save</br>
-angular.cli.json: add script
-
-## Service
-## Component
-
-</br>
 package.json: configure packages to install, so you don't need to upload node-modules </br>
 .angular-cli.json: angular configuration</br>
 - root: starting(e.g.src)</br>
