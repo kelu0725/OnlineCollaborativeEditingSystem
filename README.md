@@ -1,5 +1,27 @@
-Read me
-# Deployment Environment
+
+# Angular
+
+## Model
+## View
+## Service
+## Component
+
+</br>
+package.json: configure packages to install, so you don't need to upload node-modules </br>
+.angular-cli.json: angular configuration</br>
+- root: starting(e.g.src)</br>
+- outdir: files to packaged</br>
+- index/main/polyfills(new javascript)/styles(css,third party bootstrap css)/script(js) </br>
+- environment </br>
+- editorconfig </br>
+-.gigignore </br>
+- src: component
+
+
+
+
+</br>
+# Environment
 
 # Install Node.js & npm
 There are two options to install Node.js. You may install Node.js either by downloading it from Node.js website, or by installing a Node Version Manager (NVM) (Recommended). 
