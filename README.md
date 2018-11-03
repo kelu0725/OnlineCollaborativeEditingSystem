@@ -46,12 +46,3 @@ To verify that Angular CLI has been installed, run:
 ```
 ng -v
 ```
-
-
-Nodemon
-sudo npm install -g nodemon</br>
-使用npm 安装nodemon组件
-Angular5n</br>
-Install nvm to install angular-cli(recommended)</br>
-sudo npm install -g @angular/cli@latest
-安装最新版本的 angularcli
