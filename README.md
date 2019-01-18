@@ -10,8 +10,6 @@ package.json: configure packages to install, so you don't need to upload node-mo
 - src: component
 
 
-
-
 </br>
 # Environment
 
@@ -60,3 +58,19 @@ To verify that Angular CLI has been installed, run:
 ```
 ng -v
 ```
+## Notes🔗
+Angular is a framework for building client applications in HTML and either JavaScript or a language like TypeScript that compiles to JavaScript. TypeScript is recommended.
+Templates: composing HTML templates with Angularized markup (View)</br>
+Components: classes to manage or support the templates. The class interacts with the view
+through an API of properties and methods. (Model) </br>
+Services: adding application logic. Almost anything can be a service. For example logging service,
+data service, etc.</br>
+Modules: boxing components and services</br>
+Metadata: tells Angular how to process a class, including selector, template url, css template and so on</br>
+A directive is a class with a @Directive decorator. Angular templates are dynamic. When Angular renders them, it transforms the DOM according to the instructions given by directives.</br>
+</br>
+SPA: single page application
+```
+ng -v
+```
+
