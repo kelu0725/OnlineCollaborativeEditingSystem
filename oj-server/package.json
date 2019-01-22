@@ -1,0 +1,15 @@
+{
+  "name": "oj-server",
+  "version": "1.0.0",
+  "description": "online judge system",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "KateLu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
