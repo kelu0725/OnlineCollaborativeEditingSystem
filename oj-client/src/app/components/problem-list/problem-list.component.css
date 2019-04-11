@@ -1,34 +1,35 @@
-.difficulty {
-  min-width: 65px;
-  margin-right: 10px;
-}
+  .difficulty {
+    min-width: 65px;
+    margin-right: 10px;
+  }
 
-.label.difficulty {
-  padding: 0.6em;
-  color: white;
-  font-size: 16px;
-  display: inline-block;
-  text-align: center;
+  .label.difficulty {
+    padding: 0.3em;
+    color: white;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    border-radius:8px;
 
-}
+  }
 
-.title {
-  font-size: 1.2em;
-    color: black;
-}
+  .title {
+    font-size: 1.2em;
+      color: black;
+  }
 
-.diff-easy {
-  background-color: #42ebf4;
-}
+  .diff-easy {
+    background-color: #92cf5c;
+  }
 
-.diff-medium {
-  background-color: #92cf5c;
-}
+  .diff-medium {
+    background-color: #ffb307;
+  }
 
-.diff-hard {
-  background-color: #dd0d1e;
-}
+  .diff-hard {
+    background-color: #dc3545;
+  }
 
-.diff-super {
-  background-color: #8d16e2;
-}
+  .diff-super {
+    background-color: #8d16e2;
+  }

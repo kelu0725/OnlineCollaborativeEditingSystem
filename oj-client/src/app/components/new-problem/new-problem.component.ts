@@ -6,7 +6,7 @@ const DEFAULT_PROBLEM: Problem = Object.freeze({
   id:0,
   name:'',
   desc:'',
-  difficulty:''
+  difficulty:'easy'
 });
 
 @Component({
@@ -14,19 +14,21 @@ const DEFAULT_PROBLEM: Problem = Object.freeze({
   templateUrl: './new-problem.component.html',
   styleUrls: ['./new-problem.component.css']
 })
+
 export class NewProblemComponent implements OnInit {
 
-  difficulties:string[]=['easy','medium','hard'];
-
-  newProblem: Problem=Object.assign({},DEFAULT_PROBLEM); //shallow copy from DEFAULT_PROBLEM
-
+  newProblem: Problem = Object.assign({}, DEFAULT_PROBLEM); //shallow copy from DEFAULT_PROBLEM
+  difficulties:string[] = ['easy','medium','hard'];
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    
+
   }
+
   addProblem(){
-    this.dataService.addProblem(this.newProblem);
-    this.newProblem=Object.assign({}, DEFAULT_PROBLEM);//change to default everytime after adding new one
+    this.dataService.addProblem(this.newProblem);//此处加的是一个problem的reference
+    //homework: error handle
+    this.newProblem=Object.assign({}, DEFAULT_PROBLEM);
+    //change to default everytime after adding new one
   }
 }

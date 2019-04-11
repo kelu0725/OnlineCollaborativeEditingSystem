@@ -1,8 +1,10 @@
-<div class = "container">
+<div class = "container" *ngIf = "problem">
+  <!-- ngIf to check if it is valid problem id -->
   <div class = "col-sm-12 col-md-10">
     <h3>
-      {{problem.id}}.{{problem.name}}
+      {{problem.id}}. {{problem.name}}
     </h3>
+
     <p>
       {{problem.desc}}
     </p>

@@ -1,32 +1,13 @@
-const mongoose = require("mongoose")
-require("dotenv").config();
-const db = process.env.DB_CON;
+const mongoose = require("mongoose");
 
-mongoose.connect(db)
+const ProblemSchema = mongoose.Schema({
+  id: Number,
+  name: String,
+  desc: String,
+  difficulty: String
+});
+//the schema determines that it will have the first four keys
+const ProblemModel = mongoose.model("ProblemModel",ProblemSchema);
+//the instance is problemmodel-->use to save new doc to db
 
-
-const problemModel = mongoose.model("problems");
-//get problems
-const getProblems = problemModel.find({}, function(err,problem) {
-  if(err){
-    throw err;
-  }else{
-    return problem;
-  }
-})
-
-//get problems
-const getProblem = function(id){
-  problem.Model.find({id:id}, function(err, problem){
-    if(err) {
-      throw err;
-    }else 
-     return new Promise(problem => problem.id===id);
-   }
-}
-
-//post problems
-const addProblem = function(newProblem){
-
-}
-n
+module.exports = ProblemModel;

@@ -3,26 +3,12 @@
   <form #formRef="ngForm">
 
 <!--input area for name: [(ngModel)] two way biding  -->
-    <div class="form-group row">
-
-      <div class="col-8">
+      <div class="form-group">
         <label for = "problemName"> Problem Name</label>
           <input name= "problemname" id="problemname" class = "form-control"
-          type="text" required placeholder="please enter problem name" [(ngModel)]="newProblem.name">
+          type="text" required placeholder="please enter problem name"
+          [(ngModel)]="newProblem.name">
     </div>
-
-<!-- input arear for difficulty -->
-    <div class="col-4">
-      <label for = "problemDiff"> Difficulty</label>
-        <select name= "problemDiff" id="problemDiff" class = "form-control"
-        [(ngModel)]="newProblem.difficulty">
-        <option *ngFor="let difficulty of difficulties" [value]="difficulty">
-        {{difficulty}}
-      </option>
-    </select>
-  </div>
-  
-</div>
 
     <!--textarea for problem description  -->
 
@@ -31,16 +17,27 @@
       <textarea name= "problemDesc" id="problemDesc" class = "form-control"
       type="text" required placeholder="please enter problem description." [(ngModel)]="newProblem.desc"
       row="3">
-    </textarea>
-    </div>
-    <!-- dropdown for problem difficulty -->
-    <div class="form-group">
-
+      </textarea>
   </div>
+
+  <!-- input arear for difficulty -->
+      <div class="form-group">
+        <label for = "problemDiff"> Difficulty </label>
+        <div>
+          <select name= "form-control" id="difficulty" name = "difficulty"
+          [(ngModel)]="newProblem.difficulty">
+          <option *ngFor="let difficulty of difficulties" [value]="difficulty">
+          {{difficulty}}
+        </option>
+      </select>
+      </div>
+    </div>
+
   <!-- add button -->
   <div class = "row">
     <div class = "col-md-12">
-      <button type ="submit" class="btn btn-primary pull-right" (click)="addProblem()">
+      <button type ="submit" class="btn btn-primary pull-right"
+      (click)="addProblem()">
     Add Problem  </button>
     </div>
   </div>
