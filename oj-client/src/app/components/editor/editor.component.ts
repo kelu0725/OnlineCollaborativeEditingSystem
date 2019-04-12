@@ -8,7 +8,8 @@ declare const ace: any;
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-  
+   languages: string[]= ['Java', 'Python'];
+   language: string = 'Java';
    editor: any;
 
    defaultContent = {
@@ -19,6 +20,7 @@ export class EditorComponent implements OnInit {
       }`,
       'Python':`class Solution{
         def example():
+        # write your python code here
 
       }`
    };
@@ -28,8 +30,24 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.editor = ace.edit("editor");
     this.editor.setTheme("ace/theme/eclipse");
-    this.editor.session.setMode("ace/mode/java");
-    this.editor.setValue(this.defaultContent['Java']);
+    this.resetEditor();
+    // this.editor.setValue(this.defaultContent['Java']);
   }
+
+  resetEditor():void{
+    this.editor.setValue(this.defaultContent[this.language]);
+    this.editor.session.setMode("ace/mode/" + this.language.toLowerCase());
+  }
+
+  setLanguage(language:string):void{
+    this.language = language;
+    this.resetEditor();
+  }
+
+  submit(): void{
+    const userCode = this.editor.getValue();
+    console.log(userCode)
+  }
+
 
 }
