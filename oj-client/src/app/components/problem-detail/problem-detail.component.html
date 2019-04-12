@@ -1,12 +1,15 @@
 <div class = "container" *ngIf = "problem">
+<!-- <div class = "container" >   -->
   <!-- ngIf to check if it is valid problem id -->
-  <div class = "col-sm-12 col-md-10">
-    <h3>
-      {{problem.id}}. {{problem.name}}
-    </h3>
+  <div class = "row">
+    <div class = "col-sm-12 col-md-4">
+        <h3>{{problem.id}}. {{problem.name}}</h3>
+        <p>{{problem.desc}}</p>
+    </div>
 
-    <p>
-      {{problem.desc}}
-    </p>
+  <div class = "col-sm-12 col-md-8">
+      <app-editor></app-editor>
   </div>
+
+</div>
 </div>
