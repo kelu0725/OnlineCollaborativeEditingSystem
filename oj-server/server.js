@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const mongoose = require("mongoose")
+const http = require('http')
+const socketIO = require('socket.io')
+const io = socketIO(); //initialize socket io, pass it to editorSocketService
+const editorSocketService = require('./services/editorSocketService')(io)
+//it is a function imported from editorSocketService
 
 const restRouter = require("./routes/rest");
 const indexRouter = require('./routes/index');
@@ -23,4 +28,15 @@ app.use((req, res) => {
 })
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+// app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
+//initialize server and attach io on it
+const server = http.createServer(app)
+io.attach(server);
+server.listen(port);
+server.on('listening', onListening);
+
+function onListening(){
+    console.log(`This app is listening on port 3000!`)
+}
