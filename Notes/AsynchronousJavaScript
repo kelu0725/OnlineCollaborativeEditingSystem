@@ -1,0 +1,67 @@
+
+Asynchronous javascript programming
+单线程，one thread
+
+1.Callback
+
+function(() => { console.log("") }, 5000);
+
+* syntax: () parameter, =>, {}
+* this is a callback syntax, after 5000, finish the task
+
+回调函数，只有其他函数发生才发生
+A callback is a function that is to be executed after another function(normally asynchronous) has finished executing.
+It is used to make sure certain code doesn't execute until other code has already finished execution.
+
+-----------------------------------------------------
+2. Promise
+
+- represents the eventual result of an asynchronous operation
+- produce a single value in the future: resolved value or a reason why it is not resolved
+- it's in one of the 3 possible states: fulfilled, rejected, pending
+
+-----------------------------------------------------
+let promise7 = new Promise( (resolve, reject) => {
+  console.log('promise executed');
+  setTimeout( () => {
+    resolve ('If the promise is resolved, we print it with then')
+    reject(new Error('Sorry, we purposedly make it an error'))
+  },2000);
+});
+
+promise7.then((value) => {
+   console.log(value);
+})
+// if promise is resolved, the resolved value is passed to the promised
+//output is resolved.
+-----------------------------------------------------
+
+3. Reactive programming
+- paradigm that works with event-based asynchronous data streams
+- data streams: UI events, http requests, file systems, array-like objects, memory/cache
+- stream:
+A sequence of ongoing events ordered in time, emits values, error or complete signal
+EVERYTHING IS A STREAM
+
+-----------------------------------------------------
+4.Observable
+the listening to the stream is called subscribing.
+the functions we are defining are observers.
+the stream is the object(or "observable") being observed
+Observer Design Pattern
+
+Observable: an invokable collection of future values or events,
+watch these streams and emit notification when a value, error or complete signal is returned
+
+-----------------------------------------------------
+5. Reactive Extensions/Reactive X
+asynchronous programs by using observable sequences
+provides a long list of operators which allow us to filter, select, transform, combine and compose observables.
+rxjs
+
+-----------------------------------------------------
+
+
+6. Observables vs Promises
+- observables: multiple values, synchronous or asynchronous; promise has one value only
+- observables can be cancelled, let observer unsubscribe

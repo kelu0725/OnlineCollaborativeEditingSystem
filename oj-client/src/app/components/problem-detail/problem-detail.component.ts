@@ -20,7 +20,6 @@ export class ProblemDetailComponent implements OnInit {
     this.route.params.subscribe((params)=> {//这里的params指的是routing里的param
       // this.problem = this.dataService.getProblem(+params['id']);
       //+ is to convert string to number
-
       this.dataService.getProblem(+params['id'])
       .then(problem => this.problem = problem);
     })

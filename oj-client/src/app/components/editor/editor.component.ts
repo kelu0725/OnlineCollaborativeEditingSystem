@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CollaborationService} from '../../services/collaboration.service'
-import {ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { CollaborationService } from '../../services/collaboration.service'
 
 declare const ace: any;
 
@@ -10,6 +10,7 @@ declare const ace: any;
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
+
   sessionId: string;
   languages: string[] = ['Java', 'Python'];
   language: string = 'Java';
@@ -28,18 +29,22 @@ export class EditorComponent implements OnInit {
       }`
   };
 
-  constructor(private collaboration : CollaborationService,
-  private route: ActivatedRoute) { }
+  constructor(private collaboration: CollaborationService,
+    private route: ActivatedRoute) { }
+
+//The ActivatedRoute service provides a params Observable which we can subscribe to to get the route parameters
 
   ngOnInit() {
     this.route.params
-    .subscribe(params => {
-      this.sessionId = params['id'];
-      this.initEditor();
-    })
+      .subscribe(params => {
+        this.sessionId = params['id'];
+        this.initEditor();
+        this.collaboration.restoreBuffer();
+      })
   }
 
-  initEditor(): void{
+
+  initEditor(): void {
     this.editor = ace.edit("editor");
     this.editor.setTheme("ace/theme/eclipse");
     this.resetEditor();
@@ -49,10 +54,10 @@ export class EditorComponent implements OnInit {
     //lastAppliedChange是自己加的一个property
     this.editor.lastAppliedChange = null;
 
-    //register change callback
+    //register change callback, once change, call collaboration service change function
     this.editor.on('change', (e) => {
       console.log('editor change: ' + JSON.stringify(e));
-      if(this.editor.lastAppliedChange != e){
+      if (this.editor.lastAppliedChange != e) {
         this.collaboration.change(JSON.stringify(e));
       }
     });

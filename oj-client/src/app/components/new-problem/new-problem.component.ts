@@ -21,10 +21,7 @@ export class NewProblemComponent implements OnInit {
   difficulties:string[] = ['easy','medium','hard'];
   constructor(private dataService: DataService) { }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
   addProblem(){
     this.dataService.addProblem(this.newProblem);//此处加的是一个problem的reference
     //homework: error handle
