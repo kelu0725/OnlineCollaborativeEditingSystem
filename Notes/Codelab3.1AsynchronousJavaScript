@@ -61,7 +61,41 @@ rxjs
 
 -----------------------------------------------------
 
-
 6. Observables vs Promises
 - observables: multiple values, synchronous or asynchronous; promise has one value only
 - observables can be cancelled, let observer unsubscribe
+
+-----------------------------------------------------
+7. observable execution
+Observable.create() : a lazy computation that only happens for each observer that subscribes
+Observables Execution: next, error, complete
+
+-----------------------------------------------------
+8.Subscription
+an object that represents a disposable resource, usually the execution of an Observable
+unsubscribe(), cancel the ongoing execution
+
+-----------------------------------------------------
+9.observer
+consumer, a set of callbacks, 3 types of callbacks for each type of Observable
+
+-----------------------------------------------------
+10. pull vs push
+different protocols to communicate between data producer and data consumer.
+Pull: Consumer determines when it receives data,
+Push: Producer determines when it sends data.
+------------------------------------------------------------------------------
+     |  single                                       |  multiple
+------------------------------------------------------------------------------
+pull | function(computed when called)                |  iterator           | synchronous
+------------------------------------------------------------------------------
+push | promise(may or may not return a single value) | observable(lazy push)| asynchronous
+-------------------------------------------------------------------------------
+
+11. Subject
+RXJS Subject is a special type of observable that allows values to be multicasted to many observers.
+就是一个live系统，eventemitters，有很多人可以register as listeners
+
+-------------------------------------------------------------------------------
+12. BehaviorSubject
+keep last value
