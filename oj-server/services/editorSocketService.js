@@ -1,4 +1,4 @@
-import redisClient = require('../modules/redisClient');
+const redisClient = require('../modules/redisClient');
 
 const TIMEOUT_IN_SECONDS = 3600;
 
@@ -19,8 +19,11 @@ module.exports = function(io){
   io.on('connection', (socket) => {
     //get sessionId from client
     const sessionId = socket.handshake.query['sessionId'];
+    // console.log(sessionId)
     //socketid is userId, every user is working on a sessionId
     socketIdToSessionId[socket.id] = sessionId;
+
+
 
     if(!(sessionId in collaborations)){
      //no one is working on the problem, nothing in the memory, get content from redis
@@ -41,6 +44,7 @@ module.exports = function(io){
       });
     }
       //add the current user to the memory list
+
      collaborations[sessionId]['participants'].push(socket.id);
 
     //listen to client, if change event is received, send the changes to everyone else

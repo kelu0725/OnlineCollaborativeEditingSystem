@@ -1,0 +1,4 @@
+Flask
+docker
+
+pip3 install requirement.txt

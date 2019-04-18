@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CollaborationService } from '../../services/collaboration.service'
+import { CollaborationService } from '../../services/collaboration.service';
+import { DataService} from '../../services/data.service'
 
 declare const ace: any;
 
@@ -28,9 +29,9 @@ export class EditorComponent implements OnInit {
 
       }`
   };
-
+  output: string = '';
   constructor(private collaboration: CollaborationService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private dataService: DataService) { }
 
 //The ActivatedRoute service provides a params Observable which we can subscribe to to get the route parameters
 
@@ -73,8 +74,17 @@ export class EditorComponent implements OnInit {
     this.resetEditor();
   }
 
+
+
   submit(): void {
     const userCode = this.editor.getValue();
+    const data = {
+      userCodes : userCode,
+      lang: this.language.toLocaleLowerCase()
+    }
+    this.dataService.buildAndRun(data)
+    .then(res => this.output = res.text);
+
     console.log(userCode)
   }
 

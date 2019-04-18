@@ -36,7 +36,7 @@ function quit(){
 module.exports = {
   get,
   set,
-  expires,
+  expire,
   quit,
   redisPrint: redis.prints
 }

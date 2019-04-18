@@ -214,7 +214,7 @@ module.exports = "@media screen {\n  #editor {\n    height: 300px;\n  }\n\n  .la
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <header class=\"editor-header\">\n    <!-- <div display=\"inline-flex\"> -->\n\n\n    <select class=\"form-control pull-left lang-select\" name=\"language\" [(ngModel)]=\"language\" (change)=\"setLanguage(language)\">\n      <option *ngFor=\"let language of languages\" [value]=\"language\">\n        {{language}}\n      </option>\n    </select>\n    <!--reset button -->\n    <!-- Button trigger modal -->\n    <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n      Reset\n    </button>\n  <!-- </div> -->\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h5 class=\"modal-title\" id=\"exampleModalLabel\">Are you sure</h5>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n            You will lose current code in the editor, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"resetEditor()\">Reset</button>\n          </div>\n        </div>\n      </div>\n    </div>\n   </header>\n  <!-- <div class=\"row\"> 谜一样加了div就不显示editor了 -->\n    <div id=\"editor\">\n    </div>\n    <!-- <div>\n      Output: {{output}}\n    </div>\n    <div>\n      Users: {{users}}\n    </div> -->\n  <!-- </div><!-- This is the body -->\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"submit()\">Submit Solution</button>\n  </footer>\n</section>\n"
+module.exports = "<section>\n  <header class=\"editor-header\">\n    <!-- <div display=\"inline-flex\"> -->\n\n\n    <select class=\"form-control pull-left lang-select\" name=\"language\" [(ngModel)]=\"language\" (change)=\"setLanguage(language)\">\n      <option *ngFor=\"let language of languages\" [value]=\"language\">\n        {{language}}\n      </option>\n    </select>\n    <!--reset button -->\n    <!-- Button trigger modal -->\n    <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n      Reset\n    </button>\n  <!-- </div> -->\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h5 class=\"modal-title\" id=\"exampleModalLabel\">Are you sure</h5>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n            You will lose current code in the editor, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"resetEditor()\">Reset</button>\n          </div>\n        </div>\n      </div>\n    </div>\n   </header>\n  <!-- <div class=\"row\"> 谜一样加了div就不显示editor了 -->\n    <div id=\"editor\">\n    </div>\n    <div>\n      Output: {{output}}\n    </div>\n    <!-- <div>\n      Users: {{users}}\n    </div>  -->\n  <!-- </div><!-- This is the body -->\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\" (click)=\"submit()\">Submit Solution</button>\n  </footer>\n</section>\n"
 
 /***/ }),
 
@@ -231,6 +231,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_collaboration_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/collaboration.service */ "./src/app/services/collaboration.service.ts");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -243,23 +244,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var EditorComponent = /** @class */ (function () {
-    function EditorComponent(collaboration, route) {
+    function EditorComponent(collaboration, route, dataService) {
         this.collaboration = collaboration;
         this.route = route;
+        this.dataService = dataService;
         this.languages = ['Java', 'Python'];
         this.language = 'Java';
         this.defaultContent = {
             'Java': "class Solution{\n          public static void main(String[]) args){\n            //type your java code here.\n          }\n      }",
             'Python': "class Solution{\n        def example():\n        # write your python code here\n\n      }"
         };
+        this.output = '';
     }
+    //The ActivatedRoute service provides a params Observable which we can subscribe to to get the route parameters
     EditorComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .subscribe(function (params) {
             _this.sessionId = params['id'];
             _this.initEditor();
+            _this.collaboration.restoreBuffer();
         });
     };
     EditorComponent.prototype.initEditor = function () {
@@ -272,7 +278,7 @@ var EditorComponent = /** @class */ (function () {
         this.collaboration.init(this.editor, this.sessionId);
         //lastAppliedChange是自己加的一个property
         this.editor.lastAppliedChange = null;
-        //register change callback
+        //register change callback, once change, call collaboration service change function
         this.editor.on('change', function (e) {
             console.log('editor change: ' + JSON.stringify(e));
             if (_this.editor.lastAppliedChange != e) {
@@ -289,7 +295,14 @@ var EditorComponent = /** @class */ (function () {
         this.resetEditor();
     };
     EditorComponent.prototype.submit = function () {
+        var _this = this;
         var userCode = this.editor.getValue();
+        var data = {
+            userCodes: userCode,
+            lang: this.language.toLocaleLowerCase()
+        };
+        this.dataService.buildAndRun(data)
+            .then(function (res) { return _this.output = res.text; });
         console.log(userCode);
     };
     EditorComponent = __decorate([
@@ -299,7 +312,7 @@ var EditorComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./editor.component.css */ "./src/app/components/editor/editor.component.css")]
         }),
         __metadata("design:paramtypes", [_services_collaboration_service__WEBPACK_IMPORTED_MODULE_2__["CollaborationService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]])
     ], EditorComponent);
     return EditorComponent;
 }());
@@ -428,8 +441,7 @@ var NewProblemComponent = /** @class */ (function () {
         this.newProblem = Object.assign({}, DEFAULT_PROBLEM); //shallow copy from DEFAULT_PROBLEM
         this.difficulties = ['easy', 'medium', 'hard'];
     }
-    NewProblemComponent.prototype.ngOnInit = function () {
-    };
+    NewProblemComponent.prototype.ngOnInit = function () { };
     NewProblemComponent.prototype.addProblem = function () {
         this.dataService.addProblem(this.newProblem); //此处加的是一个problem的reference
         //homework: error handle
@@ -635,17 +647,19 @@ var CollaborationService = /** @class */ (function () {
         // this.collaborationSocket.on('message', (message) => {
         //   console.log('message received from server :' + message);
         // });
-        //注册一个event listener, 监听server端发过来的改变，
+        //register event listener, listen to changes from server
         this.collaborationSocket.on('change', function (delta) {
             delta = JSON.parse(delta);
             editor.lastAppliedChange = delta;
             editor.getSession().getDocument().applyDeltas([delta]);
+            //Applies all the changes previously accumulated
         });
     };
-    //change function，client changes, 发送改变的部分
+    //send change event to server
     CollaborationService.prototype.change = function (delta) {
         this.collaborationSocket.emit('change', delta);
     };
+    //send restoreBuffer event to server
     CollaborationService.prototype.restoreBuffer = function () {
         this.collaborationSocket.emit('restoreBuffer');
     };
@@ -703,7 +717,7 @@ var DataService = /** @class */ (function () {
         this.httpClient.get('api/v1/problems')
             .toPromise()
             .then(function (res) {
-            _this._problemSource.next(res);
+            _this._problemSource.next(res); //observable produces next value
         })
             .catch(this.handleError);
         return this._problemSource.asObservable();
@@ -714,7 +728,7 @@ var DataService = /** @class */ (function () {
         //lambda function. function(problem){problem.id===id}
         return this.httpClient.get("api/v1/problems/" + id)
             .toPromise()
-            .then(function (res) { return res; })
+            .then(function (res) { return res; }) //if resolved, return res
             .catch(this.handleError);
     };
     //add particular problem
@@ -730,7 +744,18 @@ var DataService = /** @class */ (function () {
         })
             .catch(this.handleError);
     };
-    //
+    //build and run executor
+    DataService.prototype.buildAndRun = function (data) {
+        var options = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post("api/v1/result", data, options)
+            .toPromise()
+            .then(function (res) {
+            console.log(res); //just return the resolved res
+            return res;
+        })
+            .catch(this.handleError);
+    };
+    //edit new error
     DataService.prototype.handleError = function (error) {
         return Promise.reject(error.body || error);
     };

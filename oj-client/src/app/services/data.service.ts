@@ -20,7 +20,7 @@ export class DataService {
     this.httpClient.get('api/v1/problems')
     .toPromise()
     .then((res: any) => {
-      this._problemSource.next(res);
+      this._problemSource.next(res); //observable produces next value
     })
     .catch(this.handleError);
     return this._problemSource.asObservable();
@@ -32,7 +32,7 @@ export class DataService {
     //lambda function. function(problem){problem.id===id}
     return this.httpClient.get(`api/v1/problems/${id}`)
       .toPromise()
-      .then((res : any) => res)
+      .then((res : any) => res) //if resolved, return res
       .catch(this.handleError);
   }
 
@@ -50,8 +50,21 @@ export class DataService {
 
   }
 
-  //
-  private handleError(error: any): Promise<any>{
+  //build and run executor
+  buildAndRun(data):Promise<any>{
+    const options = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.httpClient.post(`api/v1/result`, data, options)
+          .toPromise()
+          .then((res:any) => {
+            console.log(res); //just return the resolved res
+            return res;
+          })
+        .catch(this.handleError);
+  }
+
+//edit new error
+  private handleError(error): Promise<any>{
     return Promise.reject(error.body || error);
   }
+
 }
